@@ -1,7 +1,9 @@
 import discord 
 from discord.ext import commands
 from core.classes import Cog_Extension
+from datetime import datetime
 
+'''我現在只在這裡放了hello跟ping指令'''
 
 class hello(Cog_Extension):
 
@@ -12,6 +14,17 @@ class hello(Cog_Extension):
     @commands.hybrid_command
     async def hello(self, ctx):
         await ctx.send("Hello", ctx.author)
+
+    @commands.hybrid_command
+    async def ping(self, ctx):
+        embed = discord.Embed(
+        color=discord.Color.red(), 
+        title="延遲", 
+        description=f'**{round(self.bot.latency*1000)}** (ms)', 
+        timestamp=datetime.now()
+        )
+
+        await ctx.send(embed = embed)
 
 
 async def setup(bot):
